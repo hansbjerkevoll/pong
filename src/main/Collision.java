@@ -15,14 +15,19 @@ public class Collision {
 		hit_detection(pong, pong.ai_paddle, pong.ball);
 		
 		 // Restart!
-        if(pong.ball.getLayoutX() <= (-pong.ball.getRadius()) || pong.ball.getLayoutX() >= (pong.scene.getWidth()) ){
+        if(pong.ball.getLayoutX() <= (-pong.ball.getRadius())){
+        	pong.score_2.setText(Integer.toString((Integer.parseInt(pong.score_2.getText()) + 1)));
+        	pong.ball.relocate(((pong.scene.getWidth()-10)/2 - pong.ball.getRadius()), (pong.scene.getHeight()/2 - pong.ball.getRadius()*2));
+        	resetBoard(pong);
+        } else if(pong.ball.getLayoutX() >= (pong.scene.getWidth()) ) {
+        	pong.score_1.setText(Integer.toString((Integer.parseInt(pong.score_1.getText()) + 1)));
         	pong.ball.relocate(((pong.scene.getWidth()-10)/2 - pong.ball.getRadius()), (pong.scene.getHeight()/2 - pong.ball.getRadius()*2));
         	resetBoard(pong);
         }
 
         //If the ball reaches the bottom or top border make the step negative
         if((pong.ball.getLayoutY() >= (pong.scene.getHeight() - pong.ball.getRadius())) || (pong.ball.getLayoutY() <= (pong.ball.getRadius()))){
-        	pong.ball_dy = -pong.ball_dy;
+        	pong.ball_vec.y_value *= -1;;
         }
 	}
 	
@@ -33,13 +38,15 @@ public class Collision {
 			if(ball.getLayoutY() >= paddle.getLayoutY() - ball.getRadius() 
 					&& (ball.getLayoutY() <= paddle.getLayoutY() + paddle.getHeight() + ball.getRadius())) {
 				
-				pong.ball_dx *= -1;
+				boolean change_xdir = false;
+				if(pong.ball_vec.x_value > 0) change_xdir = true;
 				
-				if(ball.getLayoutY() >= paddle.getLayoutY() + paddle.getHeight() / 2) {
-					if(pong.ball_dy < 0) pong.ball_dy *= -1;
-				} else {
-					if(pong.ball_dy > 0) pong.ball_dy *= -1;
-				}
+				double ang_frac = ((paddle.getLayoutY() + (paddle.getHeight() / 2)) - pong.ball.getLayoutY()) / (paddle.getHeight()/2)*-1;
+				
+				double new_ang = ang_frac * (Math.PI/4);
+				pong.ball_vec.setAngle(new_ang);  
+				
+				if(change_xdir)pong.ball_vec.x_value *= -1; 
 				 
 			}
 		}
@@ -49,10 +56,7 @@ public class Collision {
 	
 	
 	private static void resetBoard(Pong pong) {
-		pong.ball_dy = Math.max(5, Math.random()*7);
-		pong.ball_dx = Math.sqrt(Math.pow(pong.ball_speed, 2) - Math.pow(pong.ball_dy, 2));
-        if(new Random().nextBoolean()) pong.ball_dx *= -1;
-        if(new Random().nextBoolean()) pong.ball_dy *= -1;
+		pong.ball_vec = new Vector(20, Math.random()*(Math.PI/4), new Random().nextBoolean(), new Random().nextBoolean());
     	pong.move_ball = false;
 	}
 

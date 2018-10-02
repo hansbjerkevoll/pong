@@ -15,7 +15,7 @@ public class AI {
     			&& (pong.ai_paddle.getLayoutY()+pong.ai_paddle.getHeight()/2 < pong.ball.getLayoutY())) {
     		pong.ai_paddle.setLayoutY(pong.ai_paddle.getLayoutY() + pong.paddle_dy);
     	}
-		
+    	
 	}
 
 }

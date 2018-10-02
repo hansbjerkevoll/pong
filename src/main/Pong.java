@@ -27,7 +27,7 @@ public class Pong extends Application{
 
 	ArrayList<KeyCode> keys = new ArrayList<>();
 	
-	Scene scene = new Scene(pane, 1080, 720, Color.BLACK);
+	Scene scene = new Scene(pane, 1080, 600, Color.BLACK);
 	
 	Line line = new Line(scene.getWidth()/2, 12, scene.getWidth()/2, scene.getHeight());
 	
@@ -38,15 +38,9 @@ public class Pong extends Application{
 	Rectangle paddle = new Rectangle(20,100, Color.WHITE);
 	Rectangle ai_paddle = new Rectangle(20, 100, Color.WHITE);
 	
-	double ball_speed = 20;
-	double ball_dy = Math.max(5, Math.random()*7);
-	double ball_dx = Math.sqrt(Math.pow(ball_speed, 2) - Math.pow(ball_dy, 2));
+	Vector ball_vec = new Vector(5, Math.random()*(Math.PI/4), new Random().nextBoolean(), new Random().nextBoolean());
 	
-//	double ball_dx = -3;
-//	double ball_dy = 1  ;
-	
-	
-	double paddle_dy = 10;
+	double paddle_dy = 15;
 	
 	boolean move_ball = false;
 	
@@ -59,22 +53,18 @@ public class Pong extends Application{
         ball.relocate((scene.getWidth()/2 - ball.getRadius()), (scene.getHeight()/2 - ball.getRadius()*2));
         paddle.relocate(30, (scene.getHeight()/2 - paddle.getHeight()/2));
         
-        ai_paddle.relocate(scene.getWidth()-ai_paddle.getWidth()*2, (scene.getHeight()/2 - ai_paddle.getHeight()/2));
-        
-        if(new Random().nextBoolean()) ball_dx *= -1;
-        if(new Random().nextBoolean()) ball_dy *= -1;
-        
+        ai_paddle.relocate(scene.getWidth()-ai_paddle.getWidth()*2, (scene.getHeight()/2 - ai_paddle.getHeight()/2));        
         
         line.setStroke(Color.WHITE);
         line.getStrokeDashArray().addAll(5d);
         
-        score_1.setX(scene.getWidth()/2 - 50);
+        score_1.setX(scene.getWidth()/2 - 75);
         score_1.setY(50);
         score_1.setStroke(Color.WHITE);
         score_1.setFill(Color.WHITE);
         score_1.setFont(Font.font("Times New Roman", 50));
         
-        score_2.setX(scene.getWidth()/2 + 25);
+        score_2.setX(scene.getWidth()/2 + 50);
         score_2.setY(50);
         score_2.setStroke(Color.WHITE);
         score_2.setFill(Color.WHITE);
@@ -90,10 +80,10 @@ public class Pong extends Application{
         Controls.setupInput(this);
         
         timeline = new Timeline(new KeyFrame(Duration.millis(20), ae -> {
-        	
+        	 
         	if(move_ball) {
-            	ball.setLayoutX(ball.getLayoutX() + ball_dx);
-            	ball.setLayoutY(ball.getLayoutY() + ball_dy);	
+            	ball.setLayoutX(ball.getLayoutX() + ball_vec.x_value);
+            	ball.setLayoutY(ball.getLayoutY() + ball_vec.y_value);	
         	}
             
             //Handle colisions
@@ -101,7 +91,7 @@ public class Pong extends Application{
             // Handle user input
             Controls.handleInput(this);   
             // AI movement
-            AI.ai_movement(this);
+           AI.ai_movement(this);
             
         }));
         
