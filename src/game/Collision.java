@@ -1,7 +1,5 @@
 package game;
 
-import java.util.Random;
-
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
@@ -18,11 +16,12 @@ public class Collision {
         if(pong.ball.getLayoutX() <= (-pong.ball.getRadius())){
         	pong.score_2.setText(Integer.toString((Integer.parseInt(pong.score_2.getText()) + 1)));
         	pong.ball.relocate(((pong.scene.getWidth()-10)/2 - pong.ball.getRadius()), (pong.scene.getHeight()/2 - pong.ball.getRadius()*2));
-        	resetBoard(pong);
+        	pong.resetBoard();
+    		
         } else if(pong.ball.getLayoutX() >= (pong.scene.getWidth()) ) {
         	pong.score_1.setText(Integer.toString((Integer.parseInt(pong.score_1.getText()) + 1)));
         	pong.ball.relocate(((pong.scene.getWidth()-10)/2 - pong.ball.getRadius()), (pong.scene.getHeight()/2 - pong.ball.getRadius()*2));
-        	resetBoard(pong);
+        	pong.resetBoard();
         }
 
         //If the ball reaches the bottom or top border make the step negative
@@ -51,13 +50,6 @@ public class Collision {
 			}
 		}
 		
-	}
-	
-	
-	
-	private static void resetBoard(Pong pong) {
-		pong.ball_vec = new Vector(20, Math.random()*(Math.PI/4), new Random().nextBoolean(), new Random().nextBoolean());
-    	pong.move_ball = false;
 	}
 
 }

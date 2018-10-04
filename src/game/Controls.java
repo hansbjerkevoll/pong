@@ -6,6 +6,7 @@ import javafx.scene.input.KeyEvent;
 public class Controls {
 	
 	protected static void setupInput(Pong pong) {
+		
 		pong.stage.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
         	if(!pong.keys.contains(e.getCode())) {
             	pong.keys.add(e.getCode());
@@ -23,7 +24,7 @@ public class Controls {
        
 	}
 	
-	protected static void handleInput(Pong pong) {
+	protected static void handleInputPlayer1(Pong pong) {
 					
 		// Move Player 1 paddle
     	if(!(pong.paddle.getLayoutY() <= (0)) && pong.keys.contains(KeyCode.W)) {
@@ -32,7 +33,10 @@ public class Controls {
     	if(!(pong.paddle.getLayoutY() >= (pong.scene.getHeight() - pong.paddle.getHeight())) && pong.keys.contains(KeyCode.S)) {
     		pong.paddle.setLayoutY(pong.paddle.getLayoutY() + pong.paddle_dy);
     	}
-    	
+	}
+	
+	protected static void handleInputPlayer2(Pong pong) {
+		
     	// Move Player 2 paddle
     	if(!(pong.ai_paddle.getLayoutY() <= (0)) && pong.keys.contains(KeyCode.UP)) {
     		pong.ai_paddle.setLayoutY(pong.ai_paddle.getLayoutY() - pong.paddle_dy);

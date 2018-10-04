@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label style="-fx-font-weight: bold;" text="PONG" textFill="WHITE">
          <font>
@@ -26,7 +26,7 @@
                      <font>
                         <Font name="Times New Roman" size="18.0" />
                      </font></Button>
-                  <Button fx:id="two_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" text="2 PLAYER">
+                  <Button fx:id="multi_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" text="MULTIPLAYER">
                      <font>
                         <Font size="18.0" />
                      </font></Button>
@@ -52,6 +52,15 @@
          <VBox.margin>
             <Insets />
          </VBox.margin>
+      </HBox>
+      <HBox>
+         <children>
+            <Label text="Version 1.0.1" textFill="WHITE">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </Label>
+         </children>
       </HBox>
    </children>
 </VBox>
