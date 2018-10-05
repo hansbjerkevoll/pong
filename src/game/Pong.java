@@ -30,7 +30,7 @@ public class Pong {
 	
 	Scene scene = new Scene(pane, 1080, 720);
 	
-	Line line = new Line(scene.getWidth()/2, 12, scene.getWidth()/2, scene.getHeight());
+	Line line = new Line(scene.getWidth()/2, 12, scene.getWidth()/2, scene.getHeight()-12);
 	
 	Text score_1 = new Text("0");
 	Text score_2 = new Text("0");
@@ -41,43 +41,17 @@ public class Pong {
 	
 	Vector ball_vec;
 	
-	double paddle_dy = 20;
+	double paddle_dy = 10;
 	
 	boolean move_ball;
+	
+	Font pong_font;
 
     public void start(Stage stage, GameType gametype) {
-    	
+
     	this.stage = stage;
-    	
-    	resetBoard();
-       	
-    	pane.setStyle("-fx-background-color: #000000;");
-    	
-        ball.relocate((scene.getWidth()/2 - ball.getRadius()), (scene.getHeight()/2 - ball.getRadius()*2));
-        paddle.relocate(30, (scene.getHeight()/2 - paddle.getHeight()/2));
-        
-        ai_paddle.relocate(scene.getWidth()-ai_paddle.getWidth()*2, (scene.getHeight()/2 - ai_paddle.getHeight()/2));        
-        
-        line.setStroke(Color.WHITE);
-        line.getStrokeDashArray().addAll(5d);
-        
-        score_1.setX(scene.getWidth()/2 - 75);
-        score_1.setY(50);
-        score_1.setStroke(Color.WHITE);
-        score_1.setFill(Color.WHITE);
-        score_1.setFont(Font.font("Times New Roman", 50));
-        
-        score_2.setX(scene.getWidth()/2 + 50);
-        score_2.setY(50);
-        score_2.setStroke(Color.WHITE);
-        score_2.setFill(Color.WHITE);
-        score_2.setFont(Font.font("Times New Roman", 50));
-        
-        pane.getChildren().addAll(ball, paddle, ai_paddle, line, score_1, score_2);
-        
-        stage.setScene(scene);
-        
-        Controls.setupInput(this);
+
+    	initializeUI();
         
         if(gametype == GameType.SINGLE_PLAYER) {
         	timeline = single_player_timeline();
@@ -90,7 +64,7 @@ public class Pong {
     }
     
     private Timeline single_player_timeline() {
-        return timeline = new Timeline(new KeyFrame(Duration.millis(20), ae -> {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), ae -> {
        	 
         	if(move_ball) {
             	ball.setLayoutX(ball.getLayoutX() + ball_vec.x_value);
@@ -105,6 +79,10 @@ public class Pong {
             AI.ai_movement(this, ai_paddle);  
             
         }));
+        
+
+        timeline.setCycleCount(20);
+        return timeline;
         
     }
     
@@ -123,11 +101,45 @@ public class Pong {
             Controls.handleInputPlayer2(this);
             
         }));
+        
     }
        
     public void resetBoard(){
-    	ball_vec = new Vector(30, 0, new Random().nextBoolean(), new Random().nextBoolean());
+    	ball_vec = new Vector(15, 0, new Random().nextBoolean(), new Random().nextBoolean());
     	move_ball = false;
+    }
+    
+    private void initializeUI() {
+    	
+    	resetBoard();
+       	 
+    	pane.setStyle("-fx-background-color: #000000;");
+    	
+        ball.relocate((scene.getWidth()/2 - ball.getRadius()), (scene.getHeight()/2 - ball.getRadius()*2));
+        paddle.relocate(30, (scene.getHeight()/2 - paddle.getHeight()/2));
+        
+        ai_paddle.relocate(scene.getWidth()-ai_paddle.getWidth()*2, (scene.getHeight()/2 - ai_paddle.getHeight()/2));        
+        
+        line.setStroke(Color.WHITE);
+        line.getStrokeDashArray().addAll(5d);
+        
+        score_1.setX(scene.getWidth()/2 - 125);
+        score_1.setY(75);
+        score_1.setStroke(Color.WHITE);
+        score_1.setFill(Color.WHITE);
+        score_1.setFont(Font.loadFont(getClass().getResource("../menu/pong_font.ttf").toExternalForm(), 80));
+        
+        score_2.setX(scene.getWidth()/2 + 65);
+        score_2.setY(75);
+        score_2.setStroke(Color.WHITE);
+        score_2.setFill(Color.WHITE);
+        score_2.setFont(Font.loadFont(getClass().getResource("../menu/pong_font.ttf").toExternalForm(), 80));
+        
+        pane.getChildren().addAll(ball, paddle, ai_paddle, line, score_1, score_2);
+        
+        stage.setScene(scene);
+        
+        Controls.setupInput(this);
     }
     
 }

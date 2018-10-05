@@ -42,10 +42,17 @@ public class Collision {
 				
 				double ang_frac = ((paddle.getLayoutY() + (paddle.getHeight() / 2)) - pong.ball.getLayoutY()) / (paddle.getHeight()/2)*-1;
 				
+				boolean change_ydir = false;
+				if(ang_frac < 0) {
+					change_ydir = true;
+					ang_frac *= -1;
+				}
+				
 				double new_ang = ang_frac * (Math.PI/4);
 				pong.ball_vec.setAngle(new_ang);  
 				
 				if(change_xdir)pong.ball_vec.x_value *= -1; 
+				if(change_ydir)pong.ball_vec.y_value *= -1; 
 				 
 			}
 		}
