@@ -10,8 +10,6 @@ public class AI {
 		if((pong.ball_vec.x_value > 0)|| pong.move_ball == false) {
 			
 			double y_impact = calc_y_impact(pong);
-			//System.out.println(y_impact);
-			
 			
 			// Move UP
 	    	if(!(paddle.getLayoutY() <= (0)) 
@@ -38,7 +36,7 @@ public class AI {
 	protected static void ai_movement_ypos(Pong pong, Rectangle paddle) {
 		
 		// Follow the y cord of the ball
-		if((pong.ball_vec.x_value < 0)|| pong.move_ball == false) {
+		if((pong.ball_vec.x_value > 0)|| pong.move_ball == false) {
 					
 			// Move UP
 	    	if(!(paddle.getLayoutY() <= (0)) 
@@ -66,7 +64,7 @@ public class AI {
 		double x_pos = pong.ball.getLayoutX();
 		double y_pos = pong.ball.getLayoutY();
 		
-		double delta_x =  pong.scene.getWidth() - (pong.scene.getWidth() - pong.ai_paddle.getLayoutX())-x_pos;
+		double delta_x =  pong.scene.getWidth() - (pong.scene.getWidth() - pong.ai_paddle.getLayoutX()) - x_pos;
 		
 		double alpha = pong.ball_vec.angle;
 		
