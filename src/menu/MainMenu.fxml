@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="title_label" style="-fx-font-weight: bold;" text="P O N G" textFill="WHITE">
          <font>
@@ -22,11 +22,11 @@
          <children>
             <VBox alignment="CENTER" maxWidth="300.0" prefWidth="300.0" spacing="10.0">
                <children>
-                  <Button fx:id="single_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" text="SINGLE PLAYER">
+                  <Button fx:id="single_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-border-style: none;" text="SINGLE PLAYER">
                      <font>
                         <Font name="Times New Roman" size="18.0" />
                      </font></Button>
-                  <Button fx:id="multi_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" text="MULTIPLAYER">
+                  <Button fx:id="multi_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-border-style: none;" text="MULTIPLAYER">
                      <font>
                         <Font size="18.0" />
                      </font></Button>
@@ -35,7 +35,7 @@
                         <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                   </Separator>
-                  <Button fx:id="settings_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" text="SETTINGS">
+                  <Button fx:id="settings_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-border-style: none;" text="SETTINGS">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
@@ -55,7 +55,7 @@
       </HBox>
       <HBox>
          <children>
-            <Label text="Version 1.0.1" textFill="WHITE">
+            <Label fx:id="version_label" text="VERSION 1.0.1" textFill="WHITE">
                <HBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>

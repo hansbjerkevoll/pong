@@ -4,10 +4,10 @@ import javafx.scene.shape.Rectangle;
 
 public class AI {
 	
-	protected static void ai_movement(Pong pong, Rectangle paddle) {
+	protected static void ai_movement_calc(Pong pong, Rectangle paddle) {
 		
 		// Move up or down if ball is coming towards the AI
-		if((pong.ball_vec.x_value > 0) || (pong.ball_vec.x_value < 0 && pong.ball.getLayoutX() > pong.scene.getWidth() - 10 )|| pong.move_ball == false) {
+		if((pong.ball_vec.x_value > 0)|| pong.move_ball == false) {
 			
 			double y_impact = calc_y_impact(pong);
 			//System.out.println(y_impact);
@@ -34,7 +34,33 @@ public class AI {
 		}
 		
 	}
-
+	
+	protected static void ai_movement_ypos(Pong pong, Rectangle paddle) {
+		
+		// Follow the y cord of the ball
+		if((pong.ball_vec.x_value < 0)|| pong.move_ball == false) {
+					
+			// Move UP
+	    	if(!(paddle.getLayoutY() <= (0)) 
+	    			&& (paddle.getLayoutY() + paddle.getHeight()/2 > pong.ball.getLayoutY())) {
+	    		paddle.setLayoutY(paddle.getLayoutY() - pong.paddle_dy);
+	    	}
+	    	
+	    	// Move down
+	    	if(!(paddle.getLayoutY() >= (pong.scene.getHeight() - paddle.getHeight())) 
+	    			&& (paddle.getLayoutY() + paddle.getHeight()/2 < pong.ball.getLayoutY())) {
+	    		paddle.setLayoutY(paddle.getLayoutY() + pong.paddle_dy);
+	    	}
+			
+		} else {
+			if(paddle.getLayoutY() + paddle.getHeight()/2 > pong.scene.getHeight()/2) {
+				paddle.setLayoutY(paddle.getLayoutY() - pong.paddle_dy);
+			} else if (paddle.getLayoutY() + paddle.getHeight()/2 < pong.scene.getHeight()/2){
+				paddle.setLayoutY(paddle.getLayoutY() + pong.paddle_dy);
+			}
+		}
+	}
+	
 	private static double calc_y_impact(Pong pong) {
 		
 		double x_pos = pong.ball.getLayoutX();

@@ -45,7 +45,7 @@ public class Pong {
 	
 	boolean move_ball;
 	
-	Font pong_font;
+//	Font pong_font;
 
     public void start(Stage stage, GameType gametype) {
 
@@ -76,7 +76,7 @@ public class Pong {
             // Handle user input
             Controls.handleInputPlayer1(this);   
             // AI movement
-            AI.ai_movement(this, ai_paddle);  
+            AI.ai_movement_calc(this, ai_paddle); 
             
         }));
         
@@ -127,13 +127,13 @@ public class Pong {
         score_1.setY(75);
         score_1.setStroke(Color.WHITE);
         score_1.setFill(Color.WHITE);
-        score_1.setFont(Font.loadFont(getClass().getResource("../menu/pong_font.ttf").toExternalForm(), 80));
+        score_1.setFont(Font.loadFont(getClass().getResourceAsStream("../menu/pong_font.ttf"), 80));
         
         score_2.setX(scene.getWidth()/2 + 65);
         score_2.setY(75);
         score_2.setStroke(Color.WHITE);
         score_2.setFill(Color.WHITE);
-        score_2.setFont(Font.loadFont(getClass().getResource("../menu/pong_font.ttf").toExternalForm(), 80));
+        score_2.setFont(Font.loadFont(getClass().getResourceAsStream("../menu/pong_font.ttf"), 80));
         
         pane.getChildren().addAll(ball, paddle, ai_paddle, line, score_1, score_2);
         
