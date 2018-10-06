@@ -22,6 +22,11 @@
          <children>
             <VBox alignment="CENTER" maxWidth="300.0" prefWidth="300.0" spacing="10.0">
                <children>
+                  <Button fx:id="size_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-border-style: none;" text="PADDLE SIZE - SMALL">
+                     <font>
+                        <Font name="Times New Roman" size="18.0" />
+                     </font>
+                  </Button>
                   <Button fx:id="paddle_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-border-style: none;" text="PADDLE SPEED - SLOW">
                      <font>
                         <Font name="Times New Roman" size="18.0" />
@@ -33,7 +38,7 @@
                   </Button>
                   <Button fx:id="ai_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-border-style: none;" text="AI DIFFICULTY - EASY">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Times New Roman" size="18.0" />
                      </font></Button>
                   <Separator prefWidth="200.0">
                      <VBox.margin>

@@ -2,7 +2,7 @@ package menu;
 
 import java.io.IOException;
 
-import game.Pong;
+import game.PongGame;
 import globals.Fonts;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import menu.settings.SettingsController;
 
@@ -22,8 +23,9 @@ public class MainMenuController {
 	
 	private Stage stage;
 	
+	@FXML VBox root;
 	@FXML Label title_label, version_label;
-	@FXML Button single_button, multi_button, settings_button;
+	@FXML Button single_button, multi_button, settings_button, exit_button;
 	
 	private boolean mousebtn_hover = false;
 	private boolean mousebtn_hold = false;
@@ -33,7 +35,6 @@ public class MainMenuController {
 	}
 	
 	public void initialize() {
-		
 
 		title_label.setFont(Fonts.MAIN_TITLE_FONT);	
 		version_label.setFont(Fonts.VERSION_FONT);		
@@ -48,6 +49,7 @@ public class MainMenuController {
 		style_button(single_button);
 		style_button(multi_button);
 		style_button(settings_button);
+		style_button(exit_button);
 		
 		single_button.setOnAction(ae -> {
 			load_pong(GameType.SINGLE_PLAYER);
@@ -61,20 +63,22 @@ public class MainMenuController {
 			try {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("settings/Settings.fxml"));
 				SettingsController controller = new SettingsController(stage);
-				controller.setMainMenuScene(settings_button.getScene());
 				loader.setController(controller);
 				Parent root = loader.load();
-				Scene s = new Scene(root);
-				stage.setScene(s);
+				stage.getScene().setRoot(root);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		});
 		
+		exit_button.setOnAction(ae -> {
+			stage.close();
+		});
+		
 	}
 	
 	private void load_pong(GameType gametype) {
-		Pong pong = new Pong();
+		PongGame pong = new PongGame();
 		pong.start(stage, gametype);
 	}
 	

@@ -1,17 +1,22 @@
 package menu.settings.video;
 
+import java.io.IOException;
+
 import globals.Fonts;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import menu.MainMenuController;
+import menu.settings.SettingsController;
 
 public class VideoSettingsController {
 	
 	Stage stage;
-	Scene mainmenuscene;
 	
 	@FXML Label title_label, width_label, height_label, version_label;
 	@FXML TextField width_field, height_field;
@@ -48,7 +53,15 @@ public class VideoSettingsController {
 		});
 		
 		back_button.setOnAction(ae -> {
-			((Stage) back_button.getScene().getWindow()).setScene(mainmenuscene);
+			try {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("../Settings.fxml"));
+				SettingsController controller = new SettingsController(stage);
+				loader.setController(controller);
+				Parent root = loader.load();
+				stage.getScene().setRoot(root);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		});
 		
 	}
@@ -83,10 +96,6 @@ public class VideoSettingsController {
 			}
 		});
 		
-	}
-	
-	public void setMainMenuScene(Scene scene) {
-		this.mainmenuscene = scene;
 	}
 
 }

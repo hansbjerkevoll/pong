@@ -7,6 +7,7 @@ import globals.Fonts;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -18,7 +19,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import menu.MainMenuController.GameType;
 
-public class Pong {
+public class PongGame {
 	
 	
 	Stage stage;
@@ -27,16 +28,15 @@ public class Pong {
 	Timeline timeline;
 
 	ArrayList<KeyCode> keys = new ArrayList<>();
-	
-	Scene scene = new Scene(pane, 1080, 720);
 		
-	int scene_width = 1080;
-	int scene_height = 720;
+	double scene_width;
+	double scene_height;
 	
-	Line line = new Line(scene.getWidth()/2, 12, scene.getWidth()/2, scene.getHeight()-12);
+	Line line;
 	
-	Text score_1 = new Text("0");
-	Text score_2 = new Text("0");
+	Label score_1 = new Label("0");
+	Label score_2 = new Label("0");
+	Label info = new Label("Press SPACE to start");
 	
 	Circle ball = new Circle(10, Color.WHITE);
 	Rectangle paddle = new Rectangle(20,100, Color.WHITE);
@@ -49,7 +49,7 @@ public class Pong {
     public void start(Stage stage, GameType gametype) {
 
     	this.stage = stage;
-
+    	
     	initializeUI();
         
         if(gametype == GameType.SINGLE_PLAYER) {
@@ -73,9 +73,10 @@ public class Pong {
             //Handle colisions
         	Collision.handleCollisions(this);
             // Handle user input
-            Controls.handleInputPlayer1(this);   
+            Controls.handleInputPlayer1(this, paddle);   
+            Controls.handleInputPlayer2(this, paddle); 
             // AI movement
-            AI.ai_movement_calc(this, ai_paddle); 
+            AI.ai_impossible(this, ai_paddle); 
             
         }));
         
@@ -96,8 +97,8 @@ public class Pong {
             //Handle colisions
         	Collision.handleCollisions(this);
             // Handle user input
-            Controls.handleInputPlayer1(this);  
-            Controls.handleInputPlayer2(this);
+            Controls.handleInputPlayer1(this, paddle);  
+            Controls.handleInputPlayer2(this, ai_paddle);
             
         }));
         
@@ -107,14 +108,15 @@ public class Pong {
     	ball_vec = new Vector(15, 0, new Random().nextBoolean(), new Random().nextBoolean());
     	move_ball = false;
     	ball.relocate((scene_width/2 - ball.getRadius()), (scene_height/2 - ball.getRadius()*2));
+    	info.setVisible(true);
     }
     
     private void initializeUI() {
     	
-    	resetBoard();
+    	scene_width = stage.getWidth();
+    	scene_height = stage.getHeight();
     	
-    	stage.setWidth(scene_width);
-    	stage.setHeight(scene_height);
+    	resetBoard();
        	 
     	pane.setStyle("-fx-background-color: #000000;");
     	
@@ -122,24 +124,28 @@ public class Pong {
         
         ai_paddle.relocate(scene_width-ai_paddle.getWidth()*2, (scene_height/2 - ai_paddle.getHeight()/2));        
         
+        line = new Line(scene_width/2, 0, scene_width/2, scene_height);
         line.setStroke(Color.WHITE);
         line.getStrokeDashArray().addAll(5d);
         
-        score_1.setX(scene.getWidth()/2 - 110);
-        score_1.setY(70);
-        score_1.setStroke(Color.WHITE);
-        score_1.setFill(Color.WHITE);
+        score_1.layoutXProperty().bind(pane.widthProperty().subtract(score_1.widthProperty()).divide(2).subtract(70));
+        score_1.setLayoutY(0);
+        score_1.setStyle("-fx-text-fill: #FFFFFF;");
         score_1.setFont(Fonts.SCORE_FONT);
         
-        score_2.setX(scene_width/2 + 60);
-        score_2.setY(70);
-        score_2.setStroke(Color.WHITE);
-        score_2.setFill(Color.WHITE);
+        score_2.layoutXProperty().bind(pane.widthProperty().subtract(score_2.widthProperty()).divide(2).add(75));
+        score_2.setLayoutY(0);
+        score_2.setStyle("-fx-text-fill: #FFFFFF;");
         score_2.setFont(Fonts.SCORE_FONT);
         
-        pane.getChildren().addAll(ball, paddle, ai_paddle, line, score_1, score_2);
+        info.layoutXProperty().bind(pane.widthProperty().subtract(info.widthProperty()).divide(2));
+        info.setLayoutY(100);
+        info.setFont(Fonts.MAIN_BUTTON_FONT);
+        info.setStyle("-fx-text-fill: #FFFFFF;");
         
-        stage.setScene(scene);
+        pane.getChildren().addAll(ball, paddle, ai_paddle, line, score_1, score_2, info);
+        
+        stage.getScene().setRoot(pane);
         
         Controls.setupInput(this);
     }

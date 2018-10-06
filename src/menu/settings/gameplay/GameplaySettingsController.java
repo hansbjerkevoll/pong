@@ -1,22 +1,29 @@
 package menu.settings.gameplay;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 import globals.Fonts;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import menu.settings.SettingsController;
 
 public class GameplaySettingsController {	
 	
 	Stage stage;
-	Scene mainmenuscene;
 	
 	@FXML Label title_label, version_label;
-	@FXML Button paddle_button, ball_button, ai_button, back_button;
+	@FXML Button size_button, paddle_button, ball_button, ai_button, back_button;
+	
+	private List<String> paddle_size_list = Arrays.asList("SMALL", "MEDIUM", "LARGE");
+	private int size_index = 0;
+	private String paddle_size = "SMALL"; 
 	
 	private List<String> paddle_speed_list = Arrays.asList("SLOW", "MEDIUM", "FAST");
 	private int paddle_index = 0;
@@ -42,10 +49,17 @@ public class GameplaySettingsController {
 		title_label.setFont(Fonts.SECONDARY_TITLE_FONT);
 		version_label.setFont(Fonts.VERSION_FONT);
 		
+		style_button(size_button);
 		style_button(paddle_button);
 		style_button(ball_button);
 		style_button(ai_button);
 		style_button(back_button);
+		
+		size_button.setOnAction(ae -> {
+			size_index = (size_index + 1) % paddle_size_list.size();
+			paddle_size = paddle_size_list.get(size_index);
+			size_button.setText("PADDLE SIZE - " + paddle_size);
+		});
 		
 		paddle_button.setOnAction(ae -> {
 			paddle_index = (paddle_index + 1) % paddle_speed_list.size();
@@ -66,7 +80,15 @@ public class GameplaySettingsController {
 		});
 		
 		back_button.setOnAction(ae -> {
-			((Stage) back_button.getScene().getWindow()).setScene(mainmenuscene);
+			try {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("../Settings.fxml"));
+				SettingsController controller = new SettingsController(stage);
+				loader.setController(controller);
+				Parent root = loader.load();
+				stage.getScene().setRoot(root);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		});
 	}
 	
@@ -100,9 +122,5 @@ public class GameplaySettingsController {
 			}
 		});
 		
-	}
-
-	public void setMainMenuScene(Scene scene) {
-		this.mainmenuscene = scene;
 	}
 }

@@ -7,7 +7,7 @@ public class Collision {
 	
 	
 	
-	protected static void handleCollisions(Pong pong) {
+	protected static void handleCollisions(PongGame pong) {
 		
 		hit_detection(pong, pong.paddle, pong.ball);
 		hit_detection(pong, pong.ai_paddle, pong.ball);
@@ -17,18 +17,18 @@ public class Collision {
         	pong.score_2.setText(Integer.toString((Integer.parseInt(pong.score_2.getText()) + 1)));
         	pong.resetBoard();
     		
-        } else if(pong.ball.getLayoutX() >= (pong.scene.getWidth()) ) {
+        } else if(pong.ball.getLayoutX() >= (pong.scene_width) ) {
         	pong.score_1.setText(Integer.toString((Integer.parseInt(pong.score_1.getText()) + 1)));
         	pong.resetBoard();
         }
 
         //If the ball reaches the bottom or top border make the step negative
-        if((pong.ball.getLayoutY() >= (pong.scene.getHeight() - pong.ball.getRadius())) || (pong.ball.getLayoutY() <= (pong.ball.getRadius()))){
+        if((pong.ball.getLayoutY() >= (pong.scene_height - pong.ball.getRadius())) || (pong.ball.getLayoutY() <= (pong.ball.getRadius()))){
         	pong.ball_vec.y_value *= -1;;
         }
 	}
 	
-	private static void hit_detection(Pong pong, Rectangle paddle, Circle ball) {
+	private static void hit_detection(PongGame pong, Rectangle paddle, Circle ball) {
 		
 		if((ball.getLayoutX() <= paddle.getLayoutX() + paddle.getWidth() + ball.getRadius())
 				&& (ball.getLayoutX() >= paddle.getLayoutX() - ball.getRadius())) {

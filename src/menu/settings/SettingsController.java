@@ -6,17 +6,16 @@ import globals.Fonts;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import menu.MainMenuController;
 import menu.settings.gameplay.GameplaySettingsController;
 import menu.settings.video.VideoSettingsController;
 
 public class SettingsController {
 	
 	Stage stage;
-	Scene mainmenuscene;
 	
 	@FXML Label title_label, version_label;
 	@FXML Button video_button, gameplay_button, back_button;
@@ -44,11 +43,9 @@ public class SettingsController {
 			try {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("video/VideoSettings.fxml"));
 				VideoSettingsController controller = new VideoSettingsController(stage);
-				controller.setMainMenuScene(video_button.getScene());
 				loader.setController(controller);
 				Parent root = loader.load();
-				Scene s = new Scene(root);
-				stage.setScene(s);
+				stage.getScene().setRoot(root);;
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -58,19 +55,23 @@ public class SettingsController {
 			try {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("gameplay/GameplaySettings.fxml"));
 				GameplaySettingsController controller = new GameplaySettingsController(stage);
-				controller.setMainMenuScene(gameplay_button.getScene());
 				loader.setController(controller);
 				Parent root = loader.load();
-				Scene s = new Scene(root);
-				stage.setScene(s);
+				stage.getScene().setRoot(root);;
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		});
 		
 		back_button.setOnAction(ae -> {
-			if(mainmenuscene != null) {
-				stage.setScene(mainmenuscene);
+			try {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("../MainMenu.fxml"));
+				MainMenuController controller = new MainMenuController(stage);
+				loader.setController(controller);
+				Parent root = loader.load();
+				stage.getScene().setRoot(root);
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		});
 		
@@ -110,10 +111,6 @@ public class SettingsController {
 			}
 		});
 		
-	}
-	
-	public void setMainMenuScene(Scene scene) {
-		this.mainmenuscene = scene;
 	}
 
 }
