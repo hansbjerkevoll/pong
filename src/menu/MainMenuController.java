@@ -84,7 +84,7 @@ public class MainMenuController {
 	
 	private void style_button(Button button) {
 		
-		button.setFont(Fonts.SECONDARY_BUTTON_FONT);
+		button.setFont(Fonts.MAIN_BUTTON_FONT);
 		
 		button.setOnMouseEntered(me -> {
 			mousebtn_hover = true;

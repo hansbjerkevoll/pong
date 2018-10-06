@@ -16,7 +16,12 @@ public class Controls {
         	// Start game when SPACE is pressed
         	if(e.getCode() == KeyCode.SPACE) {
         		pong.move_ball = true;
-        		pong.info.setVisible(false);
+        		pong.start_info.setVisible(false);
+        	}
+        	
+        	// Pause game
+        	if(e.getCode() == KeyCode.ESCAPE) {
+        		pong.togglePause();
         	}
         });
         
