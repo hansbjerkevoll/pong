@@ -1,35 +1,25 @@
 package menu.settings;
 
-import java.util.Arrays;
-import java.util.List;
+import java.io.IOException;
 
+import globals.Fonts;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import menu.settings.gameplay.GameplaySettingsController;
+import menu.settings.video.VideoSettingsController;
 
-public class SettingsController {	
+public class SettingsController {
 	
 	Stage stage;
-	Scene mainmenu_scene;
+	Scene mainmenuscene;
 	
 	@FXML Label title_label, version_label;
-	@FXML Button paddle_button, ball_button, ai_button, screen_button, save_button, back_button;
-	
-	private List<String> paddle_speed = Arrays.asList("SLOW", "MEDIUM", "FAST");
-	private int paddle_index = 0;
-	private List<String> ball_speed = Arrays.asList("SLOW", "MEDIUM", "FAST");
-	private int ball_index = 0;
-	private List<String> ai_difficulty = Arrays.asList("EASY", "MEDIUM", "EXPERT", "IMPOSSIBLE");
-	private int ai_index = 0;
-	private List<String> screen_res = Arrays.asList("960x540", "1280x720", "1600x900", "1920x1080", "2560x1440", "3840x2160");
-	private int screen_index = 0;
-	
-	Font title_font = Font.loadFont(getClass().getResourceAsStream("../pong_font.ttf"), 60);
-	Font button_font = Font.loadFont(getClass().getResourceAsStream("../pong_font.ttf"), 15);
-	Font version_font = Font.loadFont(getClass().getResourceAsStream("../pong_font.ttf"), 12);
+	@FXML Button video_button, gameplay_button, back_button;
 	
 	private boolean mousebtn_hover = false;
 	private boolean mousebtn_hold = false;
@@ -40,24 +30,59 @@ public class SettingsController {
 	
 	public void initialize() {
 		
-		title_label.setFont(title_font);
-		version_label.setFont(version_font);
+		title_label.setFont(Fonts.SECONDARY_TITLE_FONT);
+		video_button.setFont(Fonts.SECONDARY_BUTTON_FONT);
+		gameplay_button.setFont(Fonts.SECONDARY_BUTTON_FONT);
+		back_button.setFont(Fonts.SECONDARY_BUTTON_FONT);
+		version_label.setFont(Fonts.VERSION_FONT);
 		
-		style_button(paddle_button);
-		style_button(ball_button);
-		style_button(ai_button);
-		style_button(screen_button);
-		style_button(save_button);
-		style_button(back_button);
+		video_button.setStyle("-fx-background-color: #FFFFFF;");
+		gameplay_button.setStyle("-fx-background-color: #FFFFFF;");
+		back_button.setStyle("-fx-background-color: #FFFFFF;");
+		
+		video_button.setOnAction(ae -> {
+			try {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("video/VideoSettings.fxml"));
+				VideoSettingsController controller = new VideoSettingsController(stage);
+				controller.setMainMenuScene(video_button.getScene());
+				loader.setController(controller);
+				Parent root = loader.load();
+				Scene s = new Scene(root);
+				stage.setScene(s);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		
+		gameplay_button.setOnAction(ae -> {
+			try {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("gameplay/GameplaySettings.fxml"));
+				GameplaySettingsController controller = new GameplaySettingsController(stage);
+				controller.setMainMenuScene(gameplay_button.getScene());
+				loader.setController(controller);
+				Parent root = loader.load();
+				Scene s = new Scene(root);
+				stage.setScene(s);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
 		
 		back_button.setOnAction(ae -> {
-			((Stage) back_button.getScene().getWindow()).setScene(mainmenu_scene);
+			if(mainmenuscene != null) {
+				stage.setScene(mainmenuscene);
+			}
 		});
+		
+		style_button(video_button);
+		style_button(gameplay_button);
+		style_button(back_button);
+		
 	}
 	
 	private void style_button(Button button) {
 		
-		button.setFont(button_font);
+		button.setFont(Fonts.SECONDARY_BUTTON_FONT);
 		
 		button.setOnMouseEntered(me -> {
 			mousebtn_hover = true;
@@ -86,8 +111,9 @@ public class SettingsController {
 		});
 		
 	}
-
+	
 	public void setMainMenuScene(Scene scene) {
-		this.mainmenu_scene = scene;
+		this.mainmenuscene = scene;
 	}
+
 }

@@ -20,8 +20,10 @@ public class App extends Application {
 		Parent root = loader.load();
 		Scene s = new Scene(root);
 		stage.setScene(s);
-		stage.setTitle("P O N G ™");
+		stage.setTitle("PONG™");
 		stage.setResizable(false);
+		stage.setWidth(1080);
+		stage.setHeight(720);
 		stage.show();		
 	}
 

@@ -15,12 +15,10 @@ public class Collision {
 		 // Restart!
         if(pong.ball.getLayoutX() <= (-pong.ball.getRadius())){
         	pong.score_2.setText(Integer.toString((Integer.parseInt(pong.score_2.getText()) + 1)));
-        	pong.ball.relocate(((pong.scene.getWidth()-10)/2 - pong.ball.getRadius()), (pong.scene.getHeight()/2 - pong.ball.getRadius()*2));
         	pong.resetBoard();
     		
         } else if(pong.ball.getLayoutX() >= (pong.scene.getWidth()) ) {
         	pong.score_1.setText(Integer.toString((Integer.parseInt(pong.score_1.getText()) + 1)));
-        	pong.ball.relocate(((pong.scene.getWidth()-10)/2 - pong.ball.getRadius()), (pong.scene.getHeight()/2 - pong.ball.getRadius()*2));
         	pong.resetBoard();
         }
 

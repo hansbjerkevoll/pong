@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="title_label" style="-fx-font-weight: bold;" text="SETTINGS" textFill="WHITE">
          <font>
@@ -22,37 +22,20 @@
          <children>
             <VBox alignment="CENTER" maxWidth="300.0" prefWidth="300.0" spacing="10.0">
                <children>
-                  <Button fx:id="paddle_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-border-style: none;" text="PADDLE SPEED - SLOW">
-                     <font>
-                        <Font name="Times New Roman" size="18.0" />
-                     </font></Button>
-                  <Button fx:id="ball_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-border-style: none;" text="BALL SPEED - SLOW">
+                  <Button fx:id="video_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-border-style: none;" text="VIDEO SETTINGS">
                      <font>
                         <Font name="Times New Roman" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="ai_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-border-style: none;" text="AI DIFFICULTY - EASY">
+                  <Button fx:id="gameplay_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-border-style: none;" text="GAMEPLAY SETTINGS">
                      <font>
                         <Font size="18.0" />
                      </font></Button>
-                  <Button fx:id="screen_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-border-style: none;" text="SCREEN RES. - 1920X1080">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
                   <Separator prefWidth="200.0">
                      <VBox.margin>
                         <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                   </Separator>
-                  <Button fx:id="save_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-border-style: none;" text="SAVE SETTINGS">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
                   <Button fx:id="back_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-border-style: none;" text="GO BACK">
                      <font>
                         <Font size="18.0" />

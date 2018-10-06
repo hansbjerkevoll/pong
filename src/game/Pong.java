@@ -3,6 +3,7 @@ package game;
 import java.util.ArrayList;
 import java.util.Random;
 
+import globals.Fonts;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
@@ -12,7 +13,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -29,6 +29,9 @@ public class Pong {
 	ArrayList<KeyCode> keys = new ArrayList<>();
 	
 	Scene scene = new Scene(pane, 1080, 720);
+		
+	int scene_width = 1080;
+	int scene_height = 720;
 	
 	Line line = new Line(scene.getWidth()/2, 12, scene.getWidth()/2, scene.getHeight()-12);
 	
@@ -40,13 +43,9 @@ public class Pong {
 	Rectangle ai_paddle = new Rectangle(20, 100, Color.WHITE);
 	
 	Vector ball_vec;
-	
-	double paddle_dy = 10;
-	
+	double paddle_dy = 10;	
 	boolean move_ball;
 	
-//	Font pong_font;
-
     public void start(Stage stage, GameType gametype) {
 
     	this.stage = stage;
@@ -107,33 +106,36 @@ public class Pong {
     public void resetBoard(){
     	ball_vec = new Vector(15, 0, new Random().nextBoolean(), new Random().nextBoolean());
     	move_ball = false;
+    	ball.relocate((scene_width/2 - ball.getRadius()), (scene_height/2 - ball.getRadius()*2));
     }
     
     private void initializeUI() {
     	
     	resetBoard();
+    	
+    	stage.setWidth(scene_width);
+    	stage.setHeight(scene_height);
        	 
     	pane.setStyle("-fx-background-color: #000000;");
     	
-        ball.relocate((scene.getWidth()/2 - ball.getRadius()), (scene.getHeight()/2 - ball.getRadius()*2));
-        paddle.relocate(30, (scene.getHeight()/2 - paddle.getHeight()/2));
+        paddle.relocate(30, (scene_height/2 - paddle.getHeight()/2));
         
-        ai_paddle.relocate(scene.getWidth()-ai_paddle.getWidth()*2, (scene.getHeight()/2 - ai_paddle.getHeight()/2));        
+        ai_paddle.relocate(scene_width-ai_paddle.getWidth()*2, (scene_height/2 - ai_paddle.getHeight()/2));        
         
         line.setStroke(Color.WHITE);
         line.getStrokeDashArray().addAll(5d);
         
-        score_1.setX(scene.getWidth()/2 - 125);
-        score_1.setY(75);
+        score_1.setX(scene.getWidth()/2 - 110);
+        score_1.setY(70);
         score_1.setStroke(Color.WHITE);
         score_1.setFill(Color.WHITE);
-        score_1.setFont(Font.loadFont(getClass().getResourceAsStream("../menu/pong_font.ttf"), 80));
+        score_1.setFont(Fonts.SCORE_FONT);
         
-        score_2.setX(scene.getWidth()/2 + 65);
-        score_2.setY(75);
+        score_2.setX(scene_width/2 + 60);
+        score_2.setY(70);
         score_2.setStroke(Color.WHITE);
         score_2.setFill(Color.WHITE);
-        score_2.setFont(Font.loadFont(getClass().getResourceAsStream("../menu/pong_font.ttf"), 80));
+        score_2.setFont(Fonts.SCORE_FONT);
         
         pane.getChildren().addAll(ball, paddle, ai_paddle, line, score_1, score_2);
         

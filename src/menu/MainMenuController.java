@@ -3,14 +3,13 @@ package menu;
 import java.io.IOException;
 
 import game.Pong;
-
+import globals.Fonts;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import menu.settings.SettingsController;
 
@@ -26,6 +25,8 @@ public class MainMenuController {
 	@FXML Label title_label, version_label;
 	@FXML Button single_button, multi_button, settings_button;
 	
+	private boolean mousebtn_hover = false;
+	private boolean mousebtn_hold = false;
 	
 	public MainMenuController(Stage stage) {
 		this.stage = stage;
@@ -34,21 +35,19 @@ public class MainMenuController {
 	public void initialize() {
 		
 
-		title_label.setFont(Font.loadFont(getClass().getResourceAsStream("pong_font.ttf"), 100));	
-		version_label.setFont(Font.loadFont(getClass().getResourceAsStream("pong_font.ttf"), 12));
-		
-		Font button_font = Font.loadFont(getClass().getResourceAsStream("pong_font.ttf"), 20);			
-		single_button.setFont(button_font);
-		multi_button.setFont(button_font);
-		settings_button.setFont(button_font);
+		title_label.setFont(Fonts.MAIN_TITLE_FONT);	
+		version_label.setFont(Fonts.VERSION_FONT);		
+		single_button.setFont(Fonts.MAIN_BUTTON_FONT);
+		multi_button.setFont(Fonts.MAIN_BUTTON_FONT);
+		settings_button.setFont(Fonts.MAIN_BUTTON_FONT);
 		
 		single_button.setStyle("-fx-background-color: #FFFFFF;");
 		multi_button.setStyle("-fx-background-color: #FFFFFF;");
 		settings_button.setStyle("-fx-background-color: #FFFFFF;");
 		
-		button_style(single_button);
-		button_style(multi_button);
-		button_style(settings_button);
+		style_button(single_button);
+		style_button(multi_button);
+		style_button(settings_button);
 		
 		single_button.setOnAction(ae -> {
 			load_pong(GameType.SINGLE_PLAYER);
@@ -79,22 +78,36 @@ public class MainMenuController {
 		pong.start(stage, gametype);
 	}
 	
-	private void button_style(Button button) {
+	private void style_button(Button button) {
+		
+		button.setFont(Fonts.SECONDARY_BUTTON_FONT);
+		
 		button.setOnMouseEntered(me -> {
+			mousebtn_hover = true;
 			button.setStyle("-fx-text-fill: #FFFFFF; -fx-background-color: #555555;");			
 		});
 		
 		button.setOnMouseExited(me -> {
-			button.setStyle("-fx-background-color: #FFFFFF;");
+			mousebtn_hover = false;
+			if(!mousebtn_hold) {
+				button.setStyle("-fx-background-color: #FFFFFF;");
+			}
 		});
 		
 		button.setOnMousePressed(mc -> {
+			mousebtn_hold = true;
 			button.setStyle("-fx-background-color: #333333; -fx-text-fill: #FFFFFF;");
 		});
 		
 		button.setOnMouseReleased(mr -> {
-			button.setStyle("-fx-text-fill: #FFFFFF; -fx-background-color: #555555;");	
+			mousebtn_hold = false;
+			if(mousebtn_hover) {
+				button.setStyle("-fx-text-fill: #FFFFFF; -fx-background-color: #555555;");		
+			} else {
+				button.setStyle("-fx-background-color: #FFFFFF;");
+			}
 		});
+		
 	}
 
 }

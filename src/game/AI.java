@@ -12,19 +12,21 @@ public class AI {
 			double y_impact = calc_y_impact(pong);
 			
 			// Move UP
-	    	if(!(paddle.getLayoutY() <= (0)) 
+	    	if(!(paddle.getLayoutY() < (0)) 
 	    			&& (paddle.getLayoutY() + paddle.getHeight()/2 > y_impact)) {
 	    		paddle.setLayoutY(paddle.getLayoutY() - pong.paddle_dy);
 	    	}
 	    	
 	    	// Move down
-	    	if(!(paddle.getLayoutY() >= (pong.scene.getHeight() - paddle.getHeight())) 
+	    	if(!(paddle.getLayoutY() > (pong.scene.getHeight() - paddle.getHeight())) 
 	    			&& (paddle.getLayoutY() + paddle.getHeight()/2 < y_impact)) {
 	    		paddle.setLayoutY(paddle.getLayoutY() + pong.paddle_dy);
 	    	}
 			
 		} else {
-			if(paddle.getLayoutY() + paddle.getHeight()/2 > pong.scene.getHeight()/2) {
+			if((paddle.getLayoutY() + paddle.getHeight()/2 < pong.scene.getHeight()/2 + pong.paddle_dy) &&  (paddle.getLayoutY() + paddle.getHeight()/2 > pong.scene.getHeight()/2 - pong.paddle_dy)) {
+				paddle.setLayoutY(pong.scene.getHeight()/2 - paddle.getHeight()/2);
+			} else if(paddle.getLayoutY() + paddle.getHeight()/2 > pong.scene.getHeight()/2) {
 				paddle.setLayoutY(paddle.getLayoutY() - pong.paddle_dy);
 			} else if (paddle.getLayoutY() + paddle.getHeight()/2 < pong.scene.getHeight()/2){
 				paddle.setLayoutY(paddle.getLayoutY() + pong.paddle_dy);
@@ -51,7 +53,9 @@ public class AI {
 	    	}
 			
 		} else {
-			if(paddle.getLayoutY() + paddle.getHeight()/2 > pong.scene.getHeight()/2) {
+			if((paddle.getLayoutY() + paddle.getHeight()/2 < pong.scene.getHeight()/2 + pong.paddle_dy) &&  (paddle.getLayoutY() + paddle.getHeight()/2 > pong.scene.getHeight()/2 - pong.paddle_dy)) {
+				paddle.setLayoutY(pong.scene.getHeight()/2 - paddle.getHeight()/2);
+			} else if(paddle.getLayoutY() + paddle.getHeight()/2 > pong.scene.getHeight()/2) {
 				paddle.setLayoutY(paddle.getLayoutY() - pong.paddle_dy);
 			} else if (paddle.getLayoutY() + paddle.getHeight()/2 < pong.scene.getHeight()/2){
 				paddle.setLayoutY(paddle.getLayoutY() + pong.paddle_dy);
