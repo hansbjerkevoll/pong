@@ -7,12 +7,11 @@ import globals.Fonts;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import menu.settings.SettingsController;
+import menu.settings.SettingsMenuController;
 
 public class MainMenuController {
 	
@@ -37,10 +36,7 @@ public class MainMenuController {
 	public void initialize() {
 
 		title_label.setFont(Fonts.MAIN_TITLE_FONT);	
-		version_label.setFont(Fonts.VERSION_FONT);		
-		single_button.setFont(Fonts.MAIN_BUTTON_FONT);
-		multi_button.setFont(Fonts.MAIN_BUTTON_FONT);
-		settings_button.setFont(Fonts.MAIN_BUTTON_FONT);
+		version_label.setFont(Fonts.VERSION_FONT);	
 		
 		single_button.setStyle("-fx-background-color: #FFFFFF;");
 		multi_button.setStyle("-fx-background-color: #FFFFFF;");
@@ -61,8 +57,8 @@ public class MainMenuController {
 		
 		settings_button.setOnAction(ae -> {
 			try {
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("settings/Settings.fxml"));
-				SettingsController controller = new SettingsController(stage);
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("settings/SettingsMenu.fxml"));
+				SettingsMenuController controller = new SettingsMenuController(stage);
 				loader.setController(controller);
 				Parent root = loader.load();
 				stage.getScene().setRoot(root);
@@ -88,27 +84,27 @@ public class MainMenuController {
 		
 		button.setOnMouseEntered(me -> {
 			mousebtn_hover = true;
-			button.setStyle("-fx-text-fill: #FFFFFF; -fx-background-color: #555555;");			
+			button.setStyle("-fx-focus-color: transparent; -fx-text-fill: #FFFFFF; -fx-background-color: #555555;");			
 		});
 		
 		button.setOnMouseExited(me -> {
 			mousebtn_hover = false;
 			if(!mousebtn_hold) {
-				button.setStyle("-fx-background-color: #FFFFFF;");
+				button.setStyle("-fx-focus-color: transparent; -fx-background-color: #FFFFFF;");
 			}
 		});
 		
 		button.setOnMousePressed(mc -> {
 			mousebtn_hold = true;
-			button.setStyle("-fx-background-color: #333333; -fx-text-fill: #FFFFFF;");
+			button.setStyle("-fx-focus-color: transparent; -fx-background-color: #333333; -fx-text-fill: #FFFFFF;");
 		});
 		
 		button.setOnMouseReleased(mr -> {
 			mousebtn_hold = false;
 			if(mousebtn_hover) {
-				button.setStyle("-fx-text-fill: #FFFFFF; -fx-background-color: #555555;");		
+				button.setStyle("-fx-focus-color: transparent; -fx-text-fill: #FFFFFF; -fx-background-color: #555555;");		
 			} else {
-				button.setStyle("-fx-background-color: #FFFFFF;");
+				button.setStyle("-fx-focus-color: transparent; -fx-background-color: #FFFFFF;");
 			}
 		});
 		

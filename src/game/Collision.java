@@ -2,6 +2,7 @@ package game;
 
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import sound_effects.Sound;
 
 public class Collision {
 	
@@ -16,15 +17,27 @@ public class Collision {
         if(pong.ball.getLayoutX() <= (-pong.ball.getRadius())){
         	pong.score_2.setText(Integer.toString((Integer.parseInt(pong.score_2.getText()) + 1)));
         	pong.resetBoard();
+        	
+        	// Sound effect, point
+        	if(pong.sound) Sound.playSound("point.wav");
+        	
     		
         } else if(pong.ball.getLayoutX() >= (pong.scene_width) ) {
         	pong.score_1.setText(Integer.toString((Integer.parseInt(pong.score_1.getText()) + 1)));
         	pong.resetBoard();
+        	
+        	// Sound effect, point
+        	if(pong.sound) Sound.playSound("point.wav");
+        	
         }
 
         //If the ball reaches the bottom or top border make the step negative
         if((pong.ball.getLayoutY() >= (pong.scene_height - pong.ball.getRadius())) || (pong.ball.getLayoutY() <= (pong.ball.getRadius()))){
-        	pong.ball_vec.y_value *= -1;;
+        	pong.ball_vec.y_value *= -1;
+        	
+        	// Sound effect, ball hit wall
+        	if(pong.sound) 	Sound.playSound("wall.wav");
+        	
         }
 	}
 	
@@ -51,6 +64,10 @@ public class Collision {
 				
 				if(change_xdir)pong.ball_vec.x_value *= -1; 
 				if(change_ydir)pong.ball_vec.y_value *= -1; 
+				
+				// Sound effect, ball hit paddle
+				if(pong.sound) 	Sound.playSound("paddle.wav");
+				
 				 
 			}
 		}

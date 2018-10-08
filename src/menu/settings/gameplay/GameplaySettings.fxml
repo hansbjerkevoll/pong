@@ -22,21 +22,21 @@
          <children>
             <VBox alignment="CENTER" maxWidth="300.0" prefWidth="300.0" spacing="10.0">
                <children>
-                  <Button fx:id="size_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-border-style: none;" text="PADDLE SIZE - SMALL">
+                  <Button fx:id="size_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-border-style: none;" text="PADDLE SIZE - MEDIUM">
                      <font>
                         <Font name="Times New Roman" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="paddle_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-border-style: none;" text="PADDLE SPEED - SLOW">
+                  <Button fx:id="paddle_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-border-style: none;" text="PADDLE SPEED - MEDIUM">
                      <font>
                         <Font name="Times New Roman" size="18.0" />
                      </font></Button>
-                  <Button fx:id="ball_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-border-style: none;" text="BALL SPEED - SLOW">
+                  <Button fx:id="ball_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-border-style: none;" text="BALL SPEED - MEDIUM">
                      <font>
                         <Font name="Times New Roman" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="ai_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-border-style: none;" text="AI DIFFICULTY - EASY">
+                  <Button fx:id="ai_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-border-style: none;" text="AI DIFFICULTY - IMPOSSIBLE">
                      <font>
                         <Font name="Times New Roman" size="18.0" />
                      </font></Button>
@@ -45,9 +45,14 @@
                         <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                   </Separator>
+                  <Button fx:id="save_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-border-style: none;" text="SAVE SETTINGS">
+                     <font>
+                        <Font name="Times New Roman" size="18.0" />
+                     </font>
+                  </Button>
                   <Button fx:id="back_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-border-style: none;" text="GO BACK">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Times New Roman" size="18.0" />
                      </font>
                   </Button>
                </children>

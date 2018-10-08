@@ -22,8 +22,6 @@ public class App extends Application {
 		stage.setScene(s);
 		stage.setTitle("PONG™");
 		stage.setResizable(false);
-		stage.setWidth(1080);
-		stage.setHeight(720);
 		stage.show();		
 	}
 

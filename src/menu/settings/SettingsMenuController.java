@@ -13,7 +13,7 @@ import menu.MainMenuController;
 import menu.settings.gameplay.GameplaySettingsController;
 import menu.settings.video.VideoSettingsController;
 
-public class SettingsController {
+public class SettingsMenuController {
 	
 	Stage stage;
 	
@@ -23,7 +23,7 @@ public class SettingsController {
 	private boolean mousebtn_hover = false;
 	private boolean mousebtn_hold = false;
 	
-	public SettingsController(Stage stage) {
+	public SettingsMenuController(Stage stage) {
 		this.stage = stage;
 	}
 	
@@ -87,27 +87,27 @@ public class SettingsController {
 		
 		button.setOnMouseEntered(me -> {
 			mousebtn_hover = true;
-			button.setStyle("-fx-text-fill: #FFFFFF; -fx-background-color: #555555;");			
+			button.setStyle("-fx-focus-color: transparent; -fx-text-fill: #FFFFFF; -fx-background-color: #555555;");			
 		});
 		
 		button.setOnMouseExited(me -> {
 			mousebtn_hover = false;
 			if(!mousebtn_hold) {
-				button.setStyle("-fx-background-color: #FFFFFF;");
+				button.setStyle("-fx-focus-color: transparent; -fx-background-color: #FFFFFF;");
 			}
 		});
 		
 		button.setOnMousePressed(mc -> {
 			mousebtn_hold = true;
-			button.setStyle("-fx-background-color: #333333; -fx-text-fill: #FFFFFF;");
+			button.setStyle("-fx-focus-color: transparent; -fx-background-color: #333333; -fx-text-fill: #FFFFFF;");
 		});
 		
 		button.setOnMouseReleased(mr -> {
 			mousebtn_hold = false;
 			if(mousebtn_hover) {
-				button.setStyle("-fx-text-fill: #FFFFFF; -fx-background-color: #555555;");		
+				button.setStyle("-fx-focus-color: transparent; -fx-text-fill: #FFFFFF; -fx-background-color: #555555;");		
 			} else {
-				button.setStyle("-fx-background-color: #FFFFFF;");
+				button.setStyle("-fx-focus-color: transparent; -fx-background-color: #FFFFFF;");
 			}
 		});
 		
