@@ -11,15 +11,24 @@ public class AI {
 			
 			double y_impact = calc_y_impact(pong);
 			
+			double precision = 0;
+			if(pong.paddle.getLayoutY() + pong.paddle.getHeight()/2 >= pong.scene_height/2) {
+				precision = precision_shot_up(pong, paddle, pong.paddle);
+			} else {
+				precision = precision_shot_down(pong, paddle, pong.paddle);
+			}
+					
+			double target = y_impact + precision;
+			
 			// Move UP
 	    	if(!(paddle.getLayoutY() < (0)) 
-	    			&& (paddle.getLayoutY() + paddle.getHeight()/2 > y_impact)) {
+	    			&& (paddle.getLayoutY() + paddle.getHeight()/2 > target)) {
 	    		paddle.setLayoutY(paddle.getLayoutY() - pong.paddle_dy);
 	    	}
 	    	
 	    	// Move down
 	    	if(!(paddle.getLayoutY() > (pong.scene_height - paddle.getHeight())) 
-	    			&& (paddle.getLayoutY() + paddle.getHeight()/2 < y_impact)) {
+	    			&& (paddle.getLayoutY() + paddle.getHeight()/2 < target)) {
 	    		paddle.setLayoutY(paddle.getLayoutY() + pong.paddle_dy);
 	    	}
 			
@@ -63,6 +72,7 @@ public class AI {
 		}
 	}
 	
+	// Calculate where the ball will impact
 	private static double calc_y_impact(PongGame pong) {
 		
 		double x_pos = pong.ball.getLayoutX();
@@ -102,4 +112,33 @@ public class AI {
 		return impact;
 		
 	}
+
+	// Calculate where to shoot the ball, to hit the corners
+	private static double precision_shot_up(PongGame pong, Rectangle paddle_1, Rectangle paddle_2) {
+		
+		double delta_y = paddle_1.getLayoutY()+(paddle_1.getHeight()/2);
+		
+		double delta_x = pong.scene_width - ((pong.scene_width - paddle_1.getLayoutX()));
+		double alpha = Math.atan(delta_y/delta_x);
+		
+		double h_diff = alpha * Math.PI/4;
+		
+		double precision = h_diff*(paddle_1.getHeight()/2);
+		
+		return precision;
+	}
+	private static double precision_shot_down(PongGame pong, Rectangle paddle_1, Rectangle paddle_2) {
+		
+		double delta_y = pong.scene_height - (paddle_1.getLayoutY()+(paddle_1.getHeight()/2));
+		
+		double delta_x = pong.scene_width - ((pong.scene_width - paddle_1.getLayoutX()));
+		double alpha = Math.atan(delta_y/delta_x);
+		
+		double h_diff = alpha * Math.PI/4;
+		
+		double precision = h_diff*(paddle_1.getHeight()/2)*-1;
+		
+		return precision;
+	}
+	
 }
