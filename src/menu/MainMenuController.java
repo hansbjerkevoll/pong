@@ -11,7 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import menu.settings.SettingsMenuController;
+import menu.settings.gameplay.GameplaySettingsController;
 
 public class MainMenuController {
 	
@@ -57,8 +57,8 @@ public class MainMenuController {
 		
 		settings_button.setOnAction(ae -> {
 			try {
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("settings/SettingsMenu.fxml"));
-				SettingsMenuController controller = new SettingsMenuController(stage);
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("settings/gameplay/GameplaySettings.fxml"));
+				GameplaySettingsController controller = new GameplaySettingsController(stage);
 				loader.setController(controller);
 				Parent root = loader.load();
 				stage.getScene().setRoot(root);

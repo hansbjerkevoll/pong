@@ -9,6 +9,7 @@ public class Controls {
 	protected static void setupInput(PongGame pong) {
 		
 		pong.stage.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
+			e.consume();
         	if(!pong.keys.contains(e.getCode())) {
             	pong.keys.add(e.getCode());
         	}
@@ -26,6 +27,7 @@ public class Controls {
         });
         
         pong.stage.addEventHandler(KeyEvent.KEY_RELEASED, e -> {
+        	e.consume();
         	if(pong.keys.contains(e.getCode())) {
             	pong.keys.remove(e.getCode());
         	}

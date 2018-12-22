@@ -10,7 +10,7 @@
 
 <VBox alignment="CENTER" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="title_label" style="-fx-font-weight: bold;" text="GAMEPLAY SETTINGS" textFill="WHITE">
+      <Label fx:id="title_label" style="-fx-font-weight: bold;" text="SETTINGS" textFill="WHITE">
          <font>
             <Font size="48.0" />
          </font>
@@ -36,10 +36,13 @@
                         <Font name="Times New Roman" size="18.0" />
                      </font>
                   </Button>
+                  <!-- AI DIFFICULTY REMOVED
                   <Button fx:id="ai_button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-border-style: none;" text="AI DIFFICULTY - IMPOSSIBLE">
                      <font>
                         <Font name="Times New Roman" size="18.0" />
-                     </font></Button>
+                     </font>
+                  </Button>
+                  -->
                   <Separator prefWidth="200.0">
                      <VBox.margin>
                         <Insets bottom="5.0" top="5.0" />
@@ -67,7 +70,7 @@
       </HBox>
       <HBox>
          <children>
-            <Label fx:id="version_label" text="VERSION 1.0.1" textFill="WHITE">
+            <Label fx:id="version_label" text="VERSION 1.0.2" textFill="WHITE">
                <HBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>

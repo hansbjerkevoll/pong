@@ -11,16 +11,19 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import menu.MainMenuController;
 import menu.settings.Settings;
 import menu.settings.SettingsFactory;
-import menu.settings.SettingsMenuController;
 
 public class GameplaySettingsController {	
 	
 	Stage stage;
 	
 	@FXML Label title_label, version_label;
-	@FXML Button size_button, paddle_button, ball_button, ai_button, save_button, back_button;
+	@FXML Button size_button, paddle_button, ball_button, save_button, back_button;
+	
+	// AI DIFFICULTY REMOVED
+//	@FXML Button ai_button;
 	
 	Settings current_settings;
 	
@@ -39,8 +42,8 @@ public class GameplaySettingsController {
 	private int ball_index = 1;
 	private String ball_speed_string = "MEDIUM"; 
 	
-	private List<String> ai_difficulty_string_list = Arrays.asList("EASY", "MEDIUM", "EXPERT", "IMPOSSIBLE");
-	private int ai_index = 3;
+//	private List<String> ai_difficulty_string_list = Arrays.asList("EASY", "MEDIUM", "EXPERT", "IMPOSSIBLE");
+//	private int ai_index = 3;
 	private String ai_difficulty = "IMPOSSIBLE"; 
 
 	private boolean mousebtn_hover = false;
@@ -69,10 +72,11 @@ public class GameplaySettingsController {
 				ball_index = ball_speed_list.indexOf(current_settings.getBall_speed());
 				ball_button.setText("BALL SPEED - " + ball_speed_string_list.get(ball_index));
 			}
-			if(ai_difficulty_string_list.contains(current_settings.getAi_difficulty())) {
-				ai_index = ai_difficulty_string_list.indexOf(current_settings.getAi_difficulty());
-				ai_button.setText("AI DIFFICULTY - " + ai_difficulty_string_list.get(ai_index));
-			}
+			
+//			if(ai_difficulty_string_list.contains(current_settings.getAi_difficulty())) {
+//				ai_index = ai_difficulty_string_list.indexOf(current_settings.getAi_difficulty());
+//				ai_button.setText("AI DIFFICULTY - " + ai_difficulty_string_list.get(ai_index));
+//			}
 			
 		}
 		
@@ -82,7 +86,7 @@ public class GameplaySettingsController {
 		style_button(size_button);
 		style_button(paddle_button);
 		style_button(ball_button);
-		style_button(ai_button);
+//		style_button(ai_button);
 		style_button(save_button);		
 		style_button(back_button);
 		
@@ -107,12 +111,12 @@ public class GameplaySettingsController {
 			save_button.setDisable(false);
 		});
 		
-		ai_button.setOnAction(ae -> {
-			ai_index = (ai_index + 1) % ai_difficulty_string_list.size();
-			ai_difficulty = ai_difficulty_string_list.get(ai_index);
-			ai_button.setText("AI DIFFICULTY - " + ai_difficulty);
-			save_button.setDisable(false);
-		});
+//		ai_button.setOnAction(ae -> {
+//			ai_index = (ai_index + 1) % ai_difficulty_string_list.size();
+//			ai_difficulty = ai_difficulty_string_list.get(ai_index);
+//			ai_button.setText("AI DIFFICULTY - " + ai_difficulty);
+//			save_button.setDisable(false);
+//		});
 		
 		save_button.setOnAction(ae -> {	
 			
@@ -135,8 +139,8 @@ public class GameplaySettingsController {
 		
 		back_button.setOnAction(ae -> {
 			try {
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("../SettingsMenu.fxml"));
-				SettingsMenuController controller = new SettingsMenuController(stage);
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("../../MainMenu.fxml"));
+				MainMenuController controller = new MainMenuController(stage);
 				loader.setController(controller);
 				Parent root = loader.load();
 				stage.getScene().setRoot(root);

@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -21,6 +22,7 @@ public class App extends Application {
 		Scene s = new Scene(root);
 		stage.setScene(s);
 		stage.setTitle("PONG™");
+		stage.getIcons().add(new Image("globals/icon.png"));
 		stage.setResizable(false);
 		stage.show();		
 	}

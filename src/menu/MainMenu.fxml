@@ -60,7 +60,7 @@
       </HBox>
       <HBox>
          <children>
-            <Label fx:id="version_label" text="VERSION 1.0.1" textFill="WHITE">
+            <Label fx:id="version_label" text="VERSION 1.0.2" textFill="WHITE">
                <HBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>

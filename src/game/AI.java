@@ -4,6 +4,8 @@ import javafx.scene.shape.Rectangle;
 
 public class AI {
 	
+	static boolean choose_random = true;
+	
 	protected static void ai_impossible(PongGame pong, Rectangle paddle) {
 		
 		// Move up or down if ball is coming towards the AI
@@ -12,11 +14,17 @@ public class AI {
 			double y_impact = calc_y_impact(pong);
 			
 			double precision = 0;
-			if(pong.paddle.getLayoutY() + pong.paddle.getHeight()/2 >= pong.scene_height/2) {
-				precision = precision_shot_up(pong, paddle, pong.paddle);
-			} else {
-				precision = precision_shot_down(pong, paddle, pong.paddle);
+			if(choose_random) {
+				choose_random = false;
+				if(pong.paddle.getLayoutY() + pong.paddle.getHeight()/2 >= pong.scene_height/2) {
+					precision = precision_shot_up(pong, paddle);
+				} else {
+					precision = precision_shot_down(pong, paddle);
+				}
+				
 			}
+			
+			
 					
 			double target = y_impact + precision;
 			
@@ -40,8 +48,8 @@ public class AI {
 			} else if (paddle.getLayoutY() + paddle.getHeight()/2 < pong.scene_height/2){
 				paddle.setLayoutY(paddle.getLayoutY() + pong.paddle_dy);
 			}
+			choose_random = true;
 		}
-		
 	}
 	
 	protected static void ai_expert(PongGame pong, Rectangle paddle) {
@@ -114,29 +122,29 @@ public class AI {
 	}
 
 	// Calculate where to shoot the ball, to hit the corners
-	private static double precision_shot_up(PongGame pong, Rectangle paddle_1, Rectangle paddle_2) {
+	private static double precision_shot_up(PongGame pong, Rectangle paddle) {
 		
-		double delta_y = paddle_1.getLayoutY()+(paddle_1.getHeight()/2);
+		double delta_y = paddle.getLayoutY()+(paddle.getHeight()/2);
 		
-		double delta_x = pong.scene_width - ((pong.scene_width - paddle_1.getLayoutX()));
+		double delta_x = pong.scene_width - ((pong.scene_width - paddle.getLayoutX()));
 		double alpha = Math.atan(delta_y/delta_x);
 		
 		double h_diff = alpha * Math.PI/4;
 		
-		double precision = h_diff*(paddle_1.getHeight()/2);
+		double precision = h_diff*(paddle.getHeight()/2);
 		
 		return precision;
 	}
-	private static double precision_shot_down(PongGame pong, Rectangle paddle_1, Rectangle paddle_2) {
+	private static double precision_shot_down(PongGame pong, Rectangle paddle) {
 		
-		double delta_y = pong.scene_height - (paddle_1.getLayoutY()+(paddle_1.getHeight()/2));
+		double delta_y = pong.scene_height - (paddle.getLayoutY()+(paddle.getHeight()/2));
 		
-		double delta_x = pong.scene_width - ((pong.scene_width - paddle_1.getLayoutX()));
+		double delta_x = pong.scene_width - ((pong.scene_width - paddle.getLayoutX()));
 		double alpha = Math.atan(delta_y/delta_x);
 		
 		double h_diff = alpha * Math.PI/4;
 		
-		double precision = h_diff*(paddle_1.getHeight()/2)*-1;
+		double precision = h_diff*(paddle.getHeight()/2)*-1;
 		
 		return precision;
 	}
